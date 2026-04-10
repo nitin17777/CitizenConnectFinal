@@ -10,6 +10,33 @@ const SPEC_CONFIG = {
   general_worker:    { label: '🔧 General Worker',    cls: 'badge-general_worker' },
 };
 
+const SPECIALIZATIONS = [
+  {
+    value: 'road_worker',
+    label: '🛣️ Road Worker',
+    desc: 'Handles: Potholes & Road Damage',
+    categories: ['🕳️ Pothole', '🛣️ Road Damage'],
+  },
+  {
+    value: 'sanitation_worker',
+    label: '🗑️ Sanitation Worker',
+    desc: 'Handles: Garbage & Sewage / Drainage',
+    categories: ['🗑️ Garbage', '🚧 Sewage / Waterlogging'],
+  },
+  {
+    value: 'electrical_worker',
+    label: '💡 Electrical Worker',
+    desc: 'Handles: Street Light & Electrical Faults',
+    categories: ['💡 Street Light'],
+  },
+  {
+    value: 'general_worker',
+    label: '🔧 General Worker',
+    desc: 'Handles: Other & Miscellaneous Issues',
+    categories: ['📌 Other / General'],
+  },
+];
+
 function WorkerDetailModal({ user, onClose }) {
   if (!user) return null;
   const s    = user.liveStats || {};
@@ -217,9 +244,51 @@ export default function AdminWorkers() {
             </div>
             <div className="form-group">
               <label className="form-label">Specialization</label>
-              <select className="form-input" value={form.specialization} onChange={e => setForm({ ...form, specialization: e.target.value })}>
-                {Object.entries(SPEC_CONFIG).map(([v, { label }]) => <option key={v} value={v}>{label}</option>)}
-              </select>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 8 }}>
+                Issues are auto-routed to workers by category match.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                {SPECIALIZATIONS.map((s) => {
+                  const isSelected = form.specialization === s.value;
+                  return (
+                    <button
+                      key={s.value}
+                      type="button"
+                      onClick={() => setForm({ ...form, specialization: s.value })}
+                      style={{
+                        display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
+                        padding: '10px 12px', borderRadius: 9, cursor: 'pointer',
+                        textAlign: 'left', width: '100%', transition: 'all 0.15s',
+                        border: `2px solid ${isSelected ? '#2563eb' : 'var(--border)'}`,
+                        background: isSelected ? 'rgba(37,99,235,0.08)' : 'var(--bg)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: 4 }}>
+                        <span style={{ fontWeight: 700, fontSize: 13, color: isSelected ? '#2563eb' : 'var(--text)' }}>
+                          {s.label}
+                        </span>
+                        {isSelected && (
+                          <span style={{ fontSize: 10, background: '#2563eb', color: '#fff', padding: '1px 7px', borderRadius: 999, fontWeight: 700 }}>✓</span>
+                        )}
+                      </div>
+                      <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 5 }}>{s.desc}</div>
+                      <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                        {s.categories.map(cat => (
+                          <span key={cat} style={{
+                            fontSize: 10, padding: '2px 7px', borderRadius: 999,
+                            background: isSelected ? 'rgba(37,99,235,0.1)' : 'var(--bg-card)',
+                            color: isSelected ? '#2563eb' : 'var(--text-subtle)',
+                            border: `1px solid ${isSelected ? '#bfdbfe' : 'var(--border)'}`,
+                            fontWeight: 500,
+                          }}>
+                            {cat}
+                          </span>
+                        ))}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
             <button type="submit" className="btn btn-primary w-full" disabled={submitting} style={{ justifyContent: 'center' }}>
               {submitting ? '⏳ Registering…' : '➕ Add Worker'}

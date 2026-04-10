@@ -5,7 +5,7 @@ import { useTheme } from '../../context/ThemeContext';
 const NAV = [
   { to: '/citizen', label: 'Dashboard', icon: '🏠', end: true },
   { to: '/citizen/report', label: 'Report Issue', icon: '📝' },
-  { to: '/citizen/my-complaints', label: 'My Complaints', icon: '📋' },
+  { to: '/citizen/my-complaints', label: 'Complaints', icon: '📋' },
 ];
 
 function ThemeToggle() {

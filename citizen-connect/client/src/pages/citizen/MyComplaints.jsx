@@ -5,13 +5,13 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 
 const STATUS_CONFIG = {
-  pending_ai:                     { label: 'Pending AI',          cls: 'badge-pending',   color: '#d97706' },
-  verified:                       { label: 'Verified',            cls: 'badge-verified',  color: '#16a34a' },
-  rejected_by_ai:                 { label: 'Rejected by AI',      cls: 'badge-rejected',  color: '#dc2626' },
-  assigned:                       { label: 'Assigned',            cls: 'badge-assigned',  color: '#2563eb' },
-  in_progress:                    { label: 'In Progress',         cls: 'badge-progress',  color: '#0891b2' },
+  pending_ai: { label: 'Pending AI', cls: 'badge-pending', color: '#d97706' },
+  verified: { label: 'Verified', cls: 'badge-verified', color: '#16a34a' },
+  rejected_by_ai: { label: 'Rejected by AI', cls: 'badge-rejected', color: '#dc2626' },
+  assigned: { label: 'Assigned', cls: 'badge-assigned', color: '#2563eb' },
+  in_progress: { label: 'In Progress', cls: 'badge-progress', color: '#0891b2' },
   completed_pending_verification: { label: 'Awaiting Verification', cls: 'badge-verifying', color: '#d97706' },
-  completed:                      { label: 'Completed',           cls: 'badge-completed', color: '#7c3aed' },
+  completed: { label: 'Completed', cls: 'badge-completed', color: '#7c3aed' },
 };
 
 const FILTERS = ['all', 'pending_ai', 'verified', 'rejected_by_ai', 'assigned', 'in_progress', 'completed_pending_verification', 'completed'];
@@ -24,9 +24,9 @@ function mapLink(location) {
 export default function MyComplaints() {
   const { user } = useAuth();
   const [complaints, setComplaints] = useState([]);
-  const [filter, setFilter]         = useState('all');
-  const [loading, setLoading]       = useState(true);
-  const [expanded, setExpanded]     = useState(null);
+  const [filter, setFilter] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState(null);
 
   useEffect(() => { fetchComplaints(); }, []);
 
@@ -50,9 +50,9 @@ export default function MyComplaints() {
       <div style={{ padding: '28px 32px', maxWidth: 960, margin: '0 auto' }}>
         <div className="shimmer-box" style={{ height: 48, width: '40%', borderRadius: 10, marginBottom: 20 }} />
         <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
-          {[1,2,3,4].map(i => <div key={i} className="shimmer-box" style={{ height: 32, width: 100, borderRadius: 999 }} />)}
+          {[1, 2, 3, 4].map(i => <div key={i} className="shimmer-box" style={{ height: 32, width: 100, borderRadius: 999 }} />)}
         </div>
-        {[1,2,3,4].map(i => (
+        {[1, 2, 3, 4].map(i => (
           <div key={i} className="card" style={{ marginBottom: 12, padding: 18 }}>
             <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
               <div className="shimmer-box" style={{ height: 22, width: 80, borderRadius: 999 }} />
@@ -70,7 +70,7 @@ export default function MyComplaints() {
     <div style={{ padding: '28px 32px', maxWidth: 960, margin: '0 auto' }}>
       {/* ── Header ── */}
       <div className="fade-in" style={{ marginBottom: 20 }}>
-        <h1 style={{ fontFamily: 'Outfit,sans-serif', fontSize: 24, fontWeight: 800, color: 'var(--text)' }}>📋 My Complaints</h1>
+        <h1 style={{ fontFamily: 'Outfit,sans-serif', fontSize: 24, fontWeight: 800, color: 'var(--text)' }}>📋 Complaints</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
           <p style={{ color: 'var(--text-muted)', fontSize: 14 }}>{complaints.length} total submitted</p>
           <span className="ai-tag">🤖 AI-Gated Pipeline</span>
@@ -102,7 +102,7 @@ export default function MyComplaints() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {filtered.map((c, idx) => {
-            const sc    = STATUS_CONFIG[c.status] || STATUS_CONFIG.pending_ai;
+            const sc = STATUS_CONFIG[c.status] || STATUS_CONFIG.pending_ai;
             const isExp = expanded === c._id;
             const mLink = mapLink(c.location);
             const confPct = Math.round((c.aiConfidence || 0) * 100);

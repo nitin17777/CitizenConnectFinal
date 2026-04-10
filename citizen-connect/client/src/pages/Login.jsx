@@ -5,10 +5,30 @@ import { useTheme } from '../context/ThemeContext';
 import toast from 'react-hot-toast';
 
 const SPECIALIZATIONS = [
-  { value: 'road_worker',        label: '🛣️ Road Worker' },
-  { value: 'sanitation_worker',  label: '🗑️ Sanitation Worker' },
-  { value: 'electrical_worker',  label: '💡 Electrical Worker' },
-  { value: 'general_worker',     label: '🔧 General Worker' },
+  {
+    value: 'road_worker',
+    label: '🛣️ Road Worker',
+    desc: 'Handles: Potholes & Road Damage',
+    categories: ['🕳️ Pothole', '🛣️ Road Damage'],
+  },
+  {
+    value: 'sanitation_worker',
+    label: '🗑️ Sanitation Worker',
+    desc: 'Handles: Garbage & Sewage / Drainage',
+    categories: ['🗑️ Garbage', '🚧 Sewage / Waterlogging'],
+  },
+  {
+    value: 'electrical_worker',
+    label: '💡 Electrical Worker',
+    desc: 'Handles: Street Light & Electrical Faults',
+    categories: ['💡 Street Light'],
+  },
+  {
+    value: 'general_worker',
+    label: '🔧 General Worker',
+    desc: 'Handles: Other & Miscellaneous Issues',
+    categories: ['📌 Other / General'],
+  },
 ];
 
 export default function Login() {
@@ -136,12 +156,52 @@ export default function Login() {
 
                 {form.role === 'worker' && (
                   <div className="form-group">
-                    <label className="form-label">Specialization</label>
-                    <select name="specialization" value={form.specialization} onChange={handleChange} className="form-input">
-                      {SPECIALIZATIONS.map((s) => (
-                        <option key={s.value} value={s.value}>{s.label}</option>
-                      ))}
-                    </select>
+                    <label className="form-label">Your Specialization</label>
+                    <p style={{ fontSize: 12, color: '#64748b', marginBottom: 10 }}>
+                      Choose what type of civic issues you'll handle. Only matching verified issues will appear in your job queue.
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {SPECIALIZATIONS.map((s) => {
+                        const isSelected = form.specialization === s.value;
+                        return (
+                          <button
+                            key={s.value}
+                            type="button"
+                            onClick={() => setForm(f => ({ ...f, specialization: s.value }))}
+                            style={{
+                              display: 'flex', flexDirection: 'column', alignItems: 'flex-start',
+                              padding: '12px 14px', borderRadius: 10, cursor: 'pointer',
+                              textAlign: 'left', width: '100%', transition: 'all 0.15s',
+                              border: `2px solid ${isSelected ? '#2563eb' : isDark ? '#334155' : '#e2e8f0'}`,
+                              background: isSelected ? (isDark ? 'rgba(37,99,235,0.15)' : '#eff6ff') : (isDark ? '#273448' : '#f8fafc'),
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: 6 }}>
+                              <span style={{ fontWeight: 700, fontSize: 14, color: isSelected ? '#2563eb' : (isDark ? '#f1f5f9' : '#0f172a') }}>
+                                {s.label}
+                              </span>
+                              {isSelected && (
+                                <span style={{ fontSize: 11, background: '#2563eb', color: '#fff', padding: '2px 8px', borderRadius: 999, fontWeight: 700 }}>Selected</span>
+                              )}
+                            </div>
+                            <div style={{ fontSize: 12, color: '#64748b', marginBottom: 8 }}>{s.desc}</div>
+                            <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+                              {s.categories.map(cat => (
+                                <span key={cat} style={{
+                                  fontSize: 11, padding: '2px 8px', borderRadius: 999,
+                                  background: isSelected ? 'rgba(37,99,235,0.12)' : (isDark ? '#1e293b' : '#f1f5f9'),
+                                  color: isSelected ? '#2563eb' : '#64748b',
+                                  border: `1px solid ${isSelected ? '#bfdbfe' : (isDark ? '#334155' : '#e2e8f0')}`,
+                                  fontWeight: 500,
+                                }}>
+                                  {cat}
+                                </span>
+                              ))}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
               </>

@@ -30,8 +30,9 @@ app.get('/api/health', (req, res) => {
 
 // ── Global Error Handler ─────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
-  console.error('[SERVER ERROR]', err.message);
-  res.status(err.statusCode || 500).json({ success: false, error: err.message || 'Server Error' });
+  const status = err.statusCode || 500;
+  if (status >= 500) console.error('[SERVER ERROR]', err.message);
+  res.status(status).json({ success: false, error: err.message || 'Server Error' });
 });
 
 const PORT = process.env.PORT || 5000;

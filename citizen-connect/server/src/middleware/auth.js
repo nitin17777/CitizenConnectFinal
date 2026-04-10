@@ -7,8 +7,12 @@ const User = require('../models/User');
  */
 const protect = async (req, res, next) => {
   // ── DEMO MODE ────────────────────────────────────────────────────────────
-  if (process.env.DEMO_MODE === 'true') {
-    const demoRole = req.headers['x-demo-role'] || 'citizen';
+  if (process.env.DEMO_MODE === 'true' && req.headers['x-demo-role']) {
+    const demoRole = req.headers['x-demo-role'];
+    const validRoles = ['citizen', 'worker', 'admin'];
+    if (!validRoles.includes(demoRole)) {
+      return res.status(400).json({ success: false, error: 'Invalid demo role' });
+    }
     try {
       let demoUser = await User.findOne({ email: `demo_${demoRole}@citizenconnect.demo` });
       if (!demoUser) {
@@ -17,6 +21,7 @@ const protect = async (req, res, next) => {
           email: `demo_${demoRole}@citizenconnect.demo`,
           password: 'demo1234',
           role: demoRole,
+          specialization: demoRole === 'worker' ? 'general_worker' : undefined,
         });
       }
       req.user = demoUser;
