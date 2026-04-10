@@ -5,6 +5,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 // Pages
 import Login from './pages/Login';
+import LandingPage from './pages/LandingPage';
 import CitizenDashboard from './pages/citizen/Dashboard';
 import AdminDashboard from './pages/admin/Dashboard';
 import WorkerDashboard from './pages/worker/Dashboard';
@@ -18,8 +19,9 @@ function RequireAuth({ children, allowedRoles }) {
 }
 
 function RoleRouter() {
-  const { user } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
+  const { user, loading } = useAuth();
+  if (loading) return <div style={{ display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',color:'#94a3b8' }}>Loading…</div>;
+  if (!user) return <LandingPage />;
   if (user.role === 'admin') return <Navigate to="/admin" replace />;
   if (user.role === 'worker') return <Navigate to="/worker" replace />;
   return <Navigate to="/citizen" replace />;
