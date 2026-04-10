@@ -18,10 +18,10 @@ function RequireAuth({ children, allowedRoles }) {
   return children;
 }
 
-function RoleRouter() {
+function DashboardRouter() {
   const { user, loading } = useAuth();
   if (loading) return <div style={{ display:'flex',alignItems:'center',justifyContent:'center',height:'100vh',color:'#94a3b8' }}>Loading…</div>;
-  if (!user) return <LandingPage />;
+  if (!user) return <Navigate to="/login" replace />;
   if (user.role === 'admin') return <Navigate to="/admin" replace />;
   if (user.role === 'worker') return <Navigate to="/worker" replace />;
   return <Navigate to="/citizen" replace />;
@@ -35,7 +35,8 @@ export default function App() {
           <Toaster position="top-right" toastOptions={{ duration: 4000, style: { background: '#16162a', color: '#f1f5f9', border: '1px solid rgba(255,255,255,0.1)' } }} />
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<RoleRouter />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<DashboardRouter />} />
 
             <Route path="/citizen/*" element={
               <RequireAuth allowedRoles={['citizen']}>

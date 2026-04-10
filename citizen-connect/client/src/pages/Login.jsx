@@ -32,7 +32,7 @@ export default function Login() {
       } else {
         await register(form.name, form.email, form.password, form.role, form.specialization);
       }
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       toast.error(err.response?.data?.error || err.message || 'Authentication failed');
     } finally {
@@ -44,7 +44,7 @@ export default function Login() {
     setLoading(true);
     try {
       await loginAsDemo(role);
-      navigate('/');
+      navigate('/dashboard');
     } catch {
       toast.error('Demo login failed');
     } finally {

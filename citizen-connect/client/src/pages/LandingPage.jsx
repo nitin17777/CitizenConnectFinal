@@ -1,7 +1,7 @@
 // ── Landing Page — Complete Entry Experience ──────────────────────────────────
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+
 
 // ── Animated Counter ─────────────────────────────────────────────────────────
 function AnimatedCounter({ target, suffix = '', duration = 2000 }) {
