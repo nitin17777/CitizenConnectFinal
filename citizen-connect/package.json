@@ -1,0 +1,15 @@
+{
+  "name": "citizen-connect",
+  "version": "1.0.0",
+  "description": "AI-Powered Civic Complaint Platform",
+  "scripts": {
+    "dev": "concurrently --names \"AI,SERVER,CLIENT\" --prefix-colors \"magenta,cyan,green\" \"npm run dev --prefix ai-service\" \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "install:all": "npm install && npm install --prefix ai-service && npm install --prefix server && npm install --prefix client",
+    "ai": "npm run dev --prefix ai-service",
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

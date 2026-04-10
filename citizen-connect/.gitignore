@@ -1,0 +1,162 @@
+# ==============================
+# 🔹 OS GENERATED FILES
+# ==============================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ==============================
+# 🔹 EDITOR / IDE FILES
+# ==============================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.bak
+*.tmp
+
+# ==============================
+# 🔹 LOG FILES
+# ==============================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==============================
+# 🔹 ENVIRONMENT FILES (IMPORTANT ⚠️)
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# 🔹 NODE.JS / MERN
+# ==============================
+node_modules/
+dist/
+build/
+.next/
+out/
+.cache/
+coverage/
+
+# ==============================
+# 🔹 PACKAGE MANAGERS
+# ==============================
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ==============================
+# 🔹 PYTHON
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ==============================
+# 🔹 C / C++ (YOUR CORE 🔥)
+# ==============================
+*.o
+*.out
+*.exe
+*.a
+*.so
+*.dll
+*.dSYM/
+*.stackdump
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake-build-*/
+
+# ==============================
+# 🔹 JAVA
+# ==============================
+*.class
+*.jar
+*.war
+*.ear
+target/
+
+# ==============================
+# 🔹 DATABASE FILES
+# ==============================
+*.sqlite
+*.db
+*.db-journal
+
+# ==============================
+# 🔹 TEST / COVERAGE
+# ==============================
+coverage/
+.nyc_output/
+*.lcov
+
+# ==============================
+# 🔹 DOCKER
+# ==============================
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+
+# ==============================
+# 🔹 MISC
+# ==============================
+*.tgz
+*.zip
+*.tar
+*.rar
+
+# ==============================
+# 🔹 TEMP FILES
+# ==============================
+tmp/
+temp/
+*.temp
+
+# ==============================
+# 🔹 SECRET FILES
+# ==============================
+*.pem
+*.key
+*.crt
+*.pfx
+
+# ==============================
+# 🔹 PROJECT-SPECIFIC (OPTIONAL)
+# ==============================
+uploads/
+public/uploads/
